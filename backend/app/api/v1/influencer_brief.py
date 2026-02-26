@@ -154,7 +154,7 @@ Cada pieza de contenido debe incluir:
 
 ---
 
-*Brief generado por SEO/GEO Partner AI — {date_str}*
+*Brief generado por Escudero - SEO+GEO Intelligence — {date_str}*
 
 ---
 

@@ -101,6 +101,21 @@ async def list_brands(project_id: uuid.UUID, db: AsyncSession = Depends(get_db))
     return result.scalars().all()
 
 
+@router.put("/{project_id}/brands/{brand_id}", response_model=BrandResponse)
+async def update_brand(project_id: uuid.UUID, brand_id: uuid.UUID, data: BrandCreate, db: AsyncSession = Depends(get_db)):
+    result = await db.execute(
+        select(Brand).where(Brand.id == brand_id, Brand.project_id == project_id)
+    )
+    brand = result.scalar_one_or_none()
+    if not brand:
+        raise HTTPException(status_code=404, detail="Brand not found")
+    for key, value in data.model_dump(exclude_unset=True).items():
+        setattr(brand, key, value)
+    await db.flush()
+    await db.refresh(brand)
+    return brand
+
+
 @router.delete("/{project_id}/brands/{brand_id}", status_code=204)
 async def delete_brand(project_id: uuid.UUID, brand_id: uuid.UUID, db: AsyncSession = Depends(get_db)):
     result = await db.execute(

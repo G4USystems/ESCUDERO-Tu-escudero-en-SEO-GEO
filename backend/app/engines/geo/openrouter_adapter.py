@@ -40,7 +40,7 @@ class OpenRouterAdapter(LLMAdapter):
             base_url=OPENROUTER_BASE_URL,
             default_headers={
                 "HTTP-Referer": settings.cors_origins.split(",")[0] if settings.cors_origins else "http://localhost:3000",
-                "X-Title": "SEO-GEO Partner AI",
+                "X-Title": "Escudero - SEO+GEO Intelligence",
             },
         )
 

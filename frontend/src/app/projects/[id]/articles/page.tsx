@@ -116,7 +116,9 @@ export default function ArticlesPage() {
         <div>
           <h1 className="text-2xl font-black text-comic-ink tracking-tight">Artículos</h1>
           <p className="text-sm text-comic-ink-soft mt-0.5">
-            Contenido generado listo para publicar — {articles.length} artículo{articles.length !== 1 ? "s" : ""}.
+            {articles.length > 0
+              ? `${articles.length} artículo${articles.length !== 1 ? "s" : ""} generados con IA — optimizados para las keywords donde rankean tus competidores. Edita, aprueba y publica en tu blog.`
+              : "Aquí aparecerán los artículos SEO generados con IA desde Dominar SEO. Ve a un nicho → Dominar SEO → selecciona keywords y genera."}
           </p>
         </div>
         <Link

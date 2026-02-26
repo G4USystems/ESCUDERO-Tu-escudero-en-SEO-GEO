@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { projects, type Project } from "@/lib/api";
-import { Globe, Plus, Trash2 } from "lucide-react";
+import { Globe, Plus, Trash2, Pencil } from "lucide-react";
 
 export default function HomePage() {
   const [list, setList] = useState<Project[]>([]);
@@ -44,19 +44,28 @@ export default function HomePage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
+      <div className="flex items-start justify-between gap-4">
+        <div className="space-y-2">
           <h1 className="text-2xl font-black text-comic-ink tracking-tight">Campañas</h1>
-          <p className="text-sm text-comic-ink-soft mt-0.5">Carga aquí los datos de tu empresa y los mercados que quieres dominar.</p>
+          <p className="text-sm text-comic-ink-soft leading-relaxed max-w-xl">
+            Crea una campaña por cada marca que quieras analizar. 🛡️ Tu escudero estudiará a tus competidores, detectará dónde tienen visibilidad que tú no tienes — en Google y en IAs — y te dará las herramientas para cerrar esa brecha. 🎯
+          </p>
         </div>
         <Link
           href="/projects/new"
-          className="inline-flex items-center gap-1.5 rounded-sm border-2 border-comic-ink bg-comic-yellow px-4 py-2 text-sm font-bold text-comic-ink shadow-comic-xs transition-all hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none"
+          className="shrink-0 inline-flex items-center gap-1.5 rounded-sm border-2 border-comic-ink bg-comic-yellow px-4 py-2 text-sm font-bold text-comic-ink shadow-comic-xs transition-all hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none"
         >
           <Plus className="h-3.5 w-3.5" />
           Nueva Campaña
         </Link>
       </div>
+
+      {/* Hint */}
+      {list.length > 0 && (
+        <p className="text-[11px] text-comic-ink-soft/70 italic">
+          👆 Haz clic en una tarjeta para abrir la campaña y gestionar sus nichos.
+        </p>
+      )}
 
       {/* Empty state */}
       {list.length === 0 ? (
@@ -112,15 +121,25 @@ export default function HomePage() {
                 </div>
               </Link>
 
-              {/* Delete button — appears on hover */}
-              <button
-                onClick={(e) => handleDelete(e, p)}
-                disabled={deleting === p.id}
-                className="absolute right-2 top-2 rounded-sm p-1.5 text-comic-ink-soft/40 opacity-0 transition-all group-hover:opacity-100 hover:bg-red-50 hover:text-red-500 disabled:cursor-not-allowed"
-                title="Eliminar campaña"
-              >
-                <Trash2 className="h-4 w-4" />
-              </button>
+              {/* Action buttons — appear on hover */}
+              <div className="absolute right-2 top-2 flex items-center gap-1 opacity-0 transition-all group-hover:opacity-100">
+                <Link
+                  href={`/projects/${p.id}/edit`}
+                  onClick={(e) => e.stopPropagation()}
+                  className="rounded-sm p-1.5 text-comic-ink-soft/40 hover:bg-comic-yellow/40 hover:text-comic-ink transition-colors"
+                  title="Editar campaña"
+                >
+                  <Pencil className="h-3.5 w-3.5" />
+                </Link>
+                <button
+                  onClick={(e) => handleDelete(e, p)}
+                  disabled={deleting === p.id}
+                  className="rounded-sm p-1.5 text-comic-ink-soft/40 hover:bg-red-50 hover:text-red-500 disabled:cursor-not-allowed transition-colors"
+                  title="Eliminar campaña"
+                >
+                  <Trash2 className="h-3.5 w-3.5" />
+                </button>
+              </div>
             </div>
           ))}
         </div>

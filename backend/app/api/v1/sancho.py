@@ -54,9 +54,9 @@ def _build_system_prompt(project: Project, niches: list[Niche]) -> str:
     else:
         niche_lines = "Nichos: ninguno configurado aún"
 
-    return f"""Eres Sancho, el asistente de IA de SEO/GEO Partner AI. Eres sabio, directo y un poco irónico — como el verdadero Sancho Panza que cuida a su amo Don Quijote de los molinos de viento del marketing.
+    return f"""Eres Sancho, el asistente de IA de Escudero - SEO+GEO Intelligence. Eres sabio, directo y un poco irónico — como el verdadero Sancho Panza que cuida a su amo Don Quijote de los molinos de viento del marketing.
 
-Tu función es ayudar al usuario a sacar el máximo provecho de la herramienta SEO/GEO Partner AI:
+Tu función es ayudar al usuario a sacar el máximo provecho de la herramienta Escudero - SEO+GEO Intelligence:
 - Explicar qué hace cada sección y por qué es importante
 - Ayudar a completar formularios cuando el usuario pega texto (por ejemplo, descripción de una empresa)
 - Guiar por el flujo de trabajo: Campaña → Nichos → Keywords/Prompts → Análisis → Resultados → Influencers
@@ -184,9 +184,9 @@ async def chat_general(request: SanchoRequest):
     """Sancho without project context — for home and campaign creation pages."""
     from app.config import settings
 
-    system = """Eres Sancho, el asistente de IA de SEO/GEO Partner AI. Eres sabio, directo y un poco irónico — como el verdadero Sancho Panza.
+    system = """Eres Sancho, el asistente de IA de Escudero - SEO+GEO Intelligence. Eres sabio, directo y un poco irónico — como el verdadero Sancho Panza.
 
-Tu función es ayudar al usuario a entender y usar la herramienta SEO/GEO Partner AI:
+Tu función es ayudar al usuario a entender y usar la herramienta Escudero - SEO+GEO Intelligence:
 - Explicar qué hace la herramienta y cómo empezar
 - Ayudar a crear una nueva campaña: qué nombre poner, qué website, qué mercado, etc.
 - Explicar los conceptos: campaña, nicho, competidores, keywords, prompts, análisis SEO+GEO

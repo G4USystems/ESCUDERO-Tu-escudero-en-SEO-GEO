@@ -199,7 +199,7 @@ export default function DominarPage() {
           Dominar SEO — Keywords
         </h2>
         <p className="mt-1 text-sm text-comic-ink-soft">
-          Keywords donde rankean tus competidores en &quot;{niche.name}&quot;. Selecciona y genera artículos.
+          Keywords donde rankean tus competidores en &quot;{niche.name}&quot; pero tú todavía no. Selecciona las que te interesan y genera artículos optimizados con IA listos para publicar en tu blog.
         </p>
       </div>
 

@@ -338,7 +338,7 @@ export default function ResultsPage() {
   const [showAll, setShowAll] = useState(false); // false = only editorial candidates
 
   // Tab
-  const [activeTab, setActiveTab] = useState<"geo" | "seo" | "competitors" | "opportunities">("seo");
+  const [activeTab, setActiveTab] = useState<"geo" | "seo" | "competitors" | "opportunities">("opportunities");
 
   // Opportunities selection
   const [selectedOpportunities, setSelectedOpportunities] = useState<Set<string>>(new Set());
@@ -650,19 +650,19 @@ export default function ResultsPage() {
         <div>
           <h2 className="text-lg font-semibold flex items-center gap-2">
             <BarChart3 className="h-5 w-5" />
-            Medios donde entrar — &quot;{niche.name}&quot;
+            Oportunidades de Partnerships — &quot;{niche.name}&quot;
           </h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            Sitios editoriales donde posicionar tu marca. Solo medios independientes que aceptan contenido.
+            Medios editoriales independientes donde tus competidores ya tienen visibilidad — y donde tú todavía no estás. Contacta para conseguir menciones, reviews o artículos patrocinados.
           </p>
         </div>
-        <button
-          onClick={() => { setLoading(true); loadData(); }}
-          className="flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-xs text-muted-foreground hover:text-foreground"
+        <Link
+          href={`/projects/${projectId}/niches/${slug}/analyze`}
+          className="flex items-center gap-1.5 rounded-sm border-2 border-comic-ink bg-comic-yellow px-3 py-1.5 text-xs font-bold text-comic-ink shadow-comic-xs transition-all hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none"
         >
           <RefreshCw className="h-3 w-3" />
-          Actualizar
-        </button>
+          Re-lanzar análisis
+        </Link>
       </div>
 
       {/* Global filters */}
@@ -708,10 +708,10 @@ export default function ResultsPage() {
           {/* Tab nav */}
           <div className="flex gap-1 rounded-lg border bg-muted/30 p-1">
             {[
+              { id: "opportunities" as const, label: "Oportunidades", icon: BarChart3, count: opportunities.length, primary: true },
               { id: "seo" as const, label: "Google SERP", icon: Search, count: seoEditorialSites.length },
               { id: "geo" as const, label: "Citados por IAs", icon: Globe, count: geoEditorialSites.length },
               { id: "competitors" as const, label: "Visibilidad Marcas", icon: Target },
-              { id: "opportunities" as const, label: "Oportunidades", icon: BarChart3, count: opportunities.length },
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -720,20 +720,21 @@ export default function ResultsPage() {
                   "flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-colors",
                   tab.id === "opportunities"
                     ? activeTab === "opportunities"
-                      ? "bg-orange-500 text-white shadow-sm"
-                      : "text-orange-600 border border-orange-300 hover:bg-orange-50"
+                      ? "bg-comic-rust text-white shadow-sm font-black"
+                      : "text-comic-rust border-2 border-comic-rust/50 bg-comic-rust/5 hover:bg-comic-rust/10 font-black"
                     : activeTab === tab.id
                       ? "bg-background text-foreground shadow-sm"
                       : "text-muted-foreground hover:text-foreground"
                 )}
               >
+                {tab.id === "opportunities" && <span className="mr-0.5">⭐</span>}
                 <tab.icon className="h-3.5 w-3.5" />
                 {tab.label}
                 {tab.count !== undefined && (
                   <span className={cn(
                     "ml-1 rounded-full px-1.5 py-0.5 text-[10px]",
                     tab.id === "opportunities"
-                      ? activeTab === "opportunities" ? "bg-white/20 text-white" : "bg-orange-100 text-orange-700"
+                      ? activeTab === "opportunities" ? "bg-white/20 text-white" : "bg-comic-rust/10 text-comic-rust"
                       : "bg-muted"
                   )}>{tab.count}</span>
                 )}

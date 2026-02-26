@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
-import { Play, CheckCircle2, XCircle, Clock, AlertTriangle, RefreshCw } from "lucide-react";
+import Link from "next/link";
+import { Play, CheckCircle2, XCircle, Clock, AlertTriangle, RefreshCw, ArrowRight } from "lucide-react";
 
 // ── Windmill spinner (from Sancho_CMO design, CSS-only) ─────────────
 function WindmillSpinner({ className = "h-4 w-4" }: { className?: string }) {
@@ -107,6 +108,7 @@ interface AnalysisLauncherProps {
   promptCount?: number;
   queryCount?: number;
   lastAnalysisDate?: string | null;
+  resultsHref?: string;
 }
 
 const STATUS_ICONS = {
@@ -125,6 +127,7 @@ export function AnalysisLauncher({
   promptCount = 0,
   queryCount = 0,
   lastAnalysisDate,
+  resultsHref,
 }: AnalysisLauncherProps) {
   const [launching, setLaunching] = useState(false);
   const [quoteIdx, setQuoteIdx] = useState(0);
@@ -212,37 +215,48 @@ export function AnalysisLauncher({
               : "Lanza los análisis SEO (Google) y GEO (IAs) para este nicho. Primero SEO, después GEO."}
           </p>
         </div>
-        {!allCompleted && (
-          <button
-            onClick={handleMainButtonClick}
-            disabled={!canLaunch || launching || anyRunning}
-            className={cn(
-              "flex items-center gap-2 rounded-sm border-2 border-comic-ink px-5 py-2.5 text-sm font-black shadow-comic-sm transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none",
-              !canLaunch || launching || anyRunning
-                ? "bg-comic-aged text-comic-ink-soft cursor-not-allowed"
-                : hasExistingResults
-                  ? "bg-comic-rust text-white"
-                  : "bg-comic-yellow text-comic-ink"
-            )}
-          >
-            {anyRunning ? (
-              <>
-                <WindmillSpinner className="h-4 w-4" />
-                Analizando...
-              </>
-            ) : hasExistingResults ? (
-              <>
-                <RefreshCw className="h-4 w-4" />
-                Re-lanzar
-              </>
-            ) : (
-              <>
-                <Play className="h-4 w-4" />
-                Lanzar todo
-              </>
-            )}
-          </button>
-        )}
+        <div className="flex items-center gap-2">
+          {resultsHref && hasExistingResults && !anyRunning && (
+            <Link
+              href={resultsHref}
+              className="flex items-center gap-2 rounded-sm border-2 border-comic-ink bg-comic-sage px-5 py-2.5 text-sm font-black text-white shadow-comic-sm transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none"
+            >
+              Ver resultados
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          )}
+          {!allCompleted && (
+            <button
+              onClick={handleMainButtonClick}
+              disabled={!canLaunch || launching || anyRunning}
+              className={cn(
+                "flex items-center gap-2 rounded-sm border-2 border-comic-ink px-5 py-2.5 text-sm font-black shadow-comic-sm transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none",
+                !canLaunch || launching || anyRunning
+                  ? "bg-comic-aged text-comic-ink-soft cursor-not-allowed"
+                  : hasExistingResults
+                    ? "bg-comic-rust text-white"
+                    : "bg-comic-yellow text-comic-ink"
+              )}
+            >
+              {anyRunning ? (
+                <>
+                  <WindmillSpinner className="h-4 w-4" />
+                  Analizando...
+                </>
+              ) : hasExistingResults ? (
+                <>
+                  <RefreshCw className="h-4 w-4" />
+                  Re-lanzar
+                </>
+              ) : (
+                <>
+                  <Play className="h-4 w-4" />
+                  Lanzar todo
+                </>
+              )}
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Confirmation dialog */}

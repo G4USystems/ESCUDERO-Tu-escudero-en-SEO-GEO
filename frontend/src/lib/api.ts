@@ -58,6 +58,8 @@ export const projects = {
     request<Brand>(`/projects/${projectId}/brands`, { method: "POST", body: JSON.stringify(data) }),
   listBrands: (projectId: string) =>
     request<Brand[]>(`/projects/${projectId}/brands`),
+  updateBrand: (projectId: string, brandId: string, data: { name?: string; domain?: string }) =>
+    request<Brand>(`/projects/${projectId}/brands/${brandId}`, { method: "PUT", body: JSON.stringify(data) }),
   deleteBrand: (projectId: string, brandId: string) =>
     request<void>(`/projects/${projectId}/brands/${brandId}`, { method: "DELETE" }),
   analyzeBrand: (projectId: string, brandId: string) =>

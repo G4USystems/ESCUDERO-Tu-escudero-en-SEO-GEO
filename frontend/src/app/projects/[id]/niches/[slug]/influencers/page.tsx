@@ -151,8 +151,8 @@ export default function InfluencersPage() {
             <h1 className="text-2xl font-black text-comic-ink tracking-tight">Influencers</h1>
             <p className="text-sm text-comic-ink-soft mt-0.5">
               {results.length > 0
-                ? `${displayed.length} perfil${displayed.length !== 1 ? "es" : ""} — ${youtube.length} YouTube · ${instagram.length} Instagram`
-                : "Sin resultados aún"}
+                ? `${displayed.length} perfil${displayed.length !== 1 ? "es" : ""} — ${youtube.length} YouTube · ${instagram.length} Instagram. Valida su audiencia y genera el brief de campaña para activarlos.`
+                : "Busca creadores de YouTube e Instagram relevantes para este nicho. Luego genera el brief editorial con IA para activarlos."}
             </p>
           </div>
         </div>

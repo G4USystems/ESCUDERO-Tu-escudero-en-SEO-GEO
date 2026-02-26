@@ -8,8 +8,8 @@ import { SanchoGlobal } from "@/components/sancho/SanchoGlobal";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "SEO+GEO Partner",
-  description: "SEO & GEO visibility analysis tool",
+  title: "Escudero · SEO+GEO Intelligence",
+  description: "Escudero — Tu escudero en SEO+GEO Intelligence",
 };
 
 export default function RootLayout({

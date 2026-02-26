@@ -31,24 +31,29 @@ export default function NichesPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-lg font-semibold">Fase 2 — Nichos y Competidores</h2>
-        <p className="mt-1 text-sm text-muted-foreground">
-          Crea nichos de mercado y anade competidores a cada uno. Un nicho es un segmento al que quieres llegar (ej: &quot;Empresas Fintech&quot;, &quot;Startups SaaS&quot;).
+        <h2 className="text-2xl font-black text-comic-ink tracking-tight">Tus nichos</h2>
+        <p className="mt-1 text-sm text-comic-ink-soft">
+          Cada nicho es un segmento de audiencia que quieres dominar. Añade los competidores que ya tienen visibilidad ahí — Escudero los analizará para encontrar dónde están ellos y tú no.
         </p>
       </div>
 
       {/* Niche list */}
       {niches.length > 0 && (
-        <div className="grid gap-3 sm:grid-cols-2">
-          {niches.map((n) => (
-            <NicheCard
-              key={n.id}
-              niche={n}
-              projectId={id}
-              stats={nicheStats[n.slug]}
-              onDelete={handleDelete}
-            />
-          ))}
+        <div className="space-y-3">
+          <p className="text-xs text-comic-ink-soft italic">
+            Haz clic en una tarjeta para configurar bien tu nicho — competidores, brief y análisis.
+          </p>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {niches.map((n) => (
+              <NicheCard
+                key={n.id}
+                niche={n}
+                projectId={id}
+                stats={nicheStats[n.slug]}
+                onDelete={handleDelete}
+              />
+            ))}
+          </div>
         </div>
       )}
 

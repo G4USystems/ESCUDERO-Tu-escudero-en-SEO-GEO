@@ -88,12 +88,12 @@ export function BriefEditor({
   const [editingModule, setEditingModule] = useState<ModuleKey | null>(null);
   const [saving, setSaving] = useState(false);
   const [generating, setGenerating] = useState<ModuleKey | null>(null);
-  // Expand modules that already have content; collapse empty ones
+  // Always start collapsed
   const [collapsed, setCollapsed] = useState<Record<ModuleKey, boolean>>({
-    A: !initialBrief.A?.trim(),
-    B: !initialBrief.B?.trim(),
-    C: !initialBrief.C?.trim(),
-    D: !initialBrief.D?.trim(),
+    A: true,
+    B: true,
+    C: true,
+    D: true,
   });
 
   const toggleCollapse = (key: ModuleKey) => {
@@ -167,9 +167,15 @@ export function BriefEditor({
                   {mod.key}
                 </span>
                 <Icon className="h-3.5 w-3.5 text-comic-ink shrink-0" />
-                <span className="text-xs font-bold text-comic-ink flex-1">{mod.title}</span>
+                <span className="text-xs font-bold text-comic-ink shrink-0">{mod.title}</span>
+                {hasContent && isCollapsed && (
+                  <span className="flex-1 text-[11px] text-comic-ink-soft truncate mx-2 italic">
+                    {content.replace(/\*\*/g, "").slice(0, 80)}…
+                  </span>
+                )}
+                {!hasContent && <span className="flex-1" />}
                 {hasContent && (
-                  <span className="text-[10px] text-comic-sage font-bold mr-1">✓</span>
+                  <span className="text-[10px] text-comic-sage font-bold mr-1 shrink-0">✓</span>
                 )}
                 <ChevronDown
                   className={cn(

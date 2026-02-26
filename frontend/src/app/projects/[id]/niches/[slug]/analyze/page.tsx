@@ -594,6 +594,7 @@ export default function AnalyzePage() {
           promptCount={promptCount}
           queryCount={queryCount}
           lastAnalysisDate={lastAnalysisDate}
+          resultsHref={`/projects/${projectId}/niches/${slug}/results`}
           disabledReason={
             tooManyPrompts
               ? `Tienes ${promptCount} prompts — el máximo es ${MAX_GEO_PROMPTS}. Ve a Configurar y elimina ${promptCount - MAX_GEO_PROMPTS} prompt${promptCount - MAX_GEO_PROMPTS !== 1 ? "s" : ""}.`

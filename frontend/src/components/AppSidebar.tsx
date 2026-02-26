@@ -12,8 +12,8 @@ const NAV_ITEMS = [
   { id: "nichos",       label: "Nichos",          icon: Target },
   { id: "partnerships", label: "Partnerships",    icon: Handshake },
   { id: "dominar",      label: "Dominar SEO/GEO", icon: Zap },
-  { id: "influencers",  label: "Influencers",     icon: Users },
   { id: "articulos",    label: "Artículos",       icon: FileText },
+  { id: "influencers",  label: "Influencers",     icon: Users },
 ] as const;
 
 // Items that require a niche slug to navigate — their suffix in the URL
@@ -125,13 +125,13 @@ export function AppSidebar() {
         {/* Brand */}
         <div className="h-14 shrink-0 flex items-center px-4 border-b border-slate-200">
           <div className="flex items-center gap-2.5">
-            <div className="h-7 w-7 rounded-md bg-comic-rust flex items-center justify-center shrink-0">
-              <span className="text-xs font-black text-white">S</span>
+            <div className="h-9 w-9 rounded-full overflow-hidden shrink-0 ring-2 ring-comic-rust ring-offset-1">
+              <img src="/sancho.png" alt="Escudero" className="h-full w-full object-cover object-top" />
             </div>
             <div className="min-w-0">
-              <div className="text-sm font-bold text-slate-900 leading-tight">SanchoCMO</div>
+              <div className="text-sm font-bold text-slate-900 leading-tight">Escudero</div>
               <div className="text-[10px] font-semibold text-comic-rust leading-tight tracking-wide">
-                SEO+GEO Claw
+                SEO+GEO Intelligence
               </div>
             </div>
           </div>
