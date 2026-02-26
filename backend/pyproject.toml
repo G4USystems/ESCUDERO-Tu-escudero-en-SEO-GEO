@@ -1,0 +1,9 @@
+[project]
+name = "seo-geo-partner"
+version = "0.1.0"
+description = "SEO + GEO analysis tool for editorial outreach"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

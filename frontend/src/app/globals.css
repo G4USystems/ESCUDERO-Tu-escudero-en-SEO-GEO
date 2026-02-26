@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Comic Book Design System — Sancho */
+    --background: 40 33% 96%; /* #F5F0E6 parchment */
+    --foreground: 240 29% 14%; /* #1A1A2E ink */
+    --card: 38 60% 97%; /* #FDF8EF paper */
+    --card-foreground: 240 29% 14%;
+    --primary: 16 56% 49%; /* #C45D35 rust */
+    --primary-foreground: 40 33% 96%;
+    --secondary: 37 30% 85%; /* #E8DCC8 aged */
+    --secondary-foreground: 240 29% 14%;
+    --muted: 37 30% 85%;
+    --muted-foreground: 240 26% 22%; /* #2D2D44 ink-soft */
+    --accent: 193 52% 49%; /* #3B9EBF cyan */
+    --accent-foreground: 40 33% 96%;
+    --destructive: 4 63% 46%; /* #C0392B red */
+    --destructive-foreground: 40 33% 96%;
+    --border: 240 29% 14%; /* ink — comic uses thick dark borders */
+    --input: 37 30% 85%;
+    --ring: 16 56% 49%;
+    --radius: 6px;
+
+    /* Comic-specific */
+    --comic-parchment: #F5F0E6;
+    --comic-paper: #FDF8EF;
+    --comic-aged: #E8DCC8;
+    --comic-ink: #1A1A2E;
+    --comic-ink-soft: #2D2D44;
+    --comic-rust: #C45D35;
+    --comic-rust-light: #D4734F;
+    --comic-rust-dark: #A34A28;
+    --comic-navy: #1E3A5F;
+    --comic-cyan: #3B9EBF;
+    --comic-cyan-light: #5BBAD9;
+    --comic-yellow: #F2C94C;
+    --comic-yellow-pale: #FFF3C4;
+    --comic-sage: #4A5D23;
+    --comic-red: #C0392B;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Helvetica Neue", Helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* ─── Comic Book Effects ─── */
+
+.comic-halftone-warm {
+  background-image: radial-gradient(circle, rgba(196, 93, 53, 0.12) 1px, transparent 1px);
+  background-size: 6px 6px;
+}
+
+.comic-halftone-cool {
+  background-image: radial-gradient(circle, rgba(30, 58, 95, 0.1) 1.5px, transparent 1.5px);
+  background-size: 4px 4px;
+}
+
+.comic-halftone-yellow {
+  background-image: radial-gradient(circle, rgba(242, 201, 76, 0.18) 1px, transparent 1px);
+  background-size: 5px 5px;
+}
+
+.comic-paper-texture {
+  position: relative;
+}
+.comic-paper-texture::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  z-index: 1;
+}
+
+.comic-speed-lines {
+  background-image: repeating-linear-gradient(
+    -15deg, transparent, transparent 8px,
+    rgba(26, 26, 46, 0.04) 8px, rgba(26, 26, 46, 0.04) 10px
+  );
+}
+
+/* Comic Shadows */
+.shadow-comic { box-shadow: 6px 6px 0px 0px #1A1A2E; }
+.shadow-comic-lg { box-shadow: 8px 8px 0px 0px #1A1A2E; }
+.shadow-comic-sm { box-shadow: 4px 4px 0px 0px #1A1A2E; }
+.shadow-comic-xs { box-shadow: 3px 3px 0px 0px #1A1A2E; }
+
+/* Comic Panel Grid */
+.comic-grid {
+  display: grid;
+  gap: 8px;
+  background: var(--comic-ink);
+  padding: 8px;
+  border: 5px solid var(--comic-ink);
+  border-radius: 6px;
+}
+.comic-grid > * {
+  background: var(--comic-paper);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* Comic Animations */
+@keyframes comic-float {
+  0%, 100% { transform: translateY(0) rotate(-0.5deg); }
+  50% { transform: translateY(-6px) rotate(0.5deg); }
+}
+@keyframes comic-pop {
+  0% { transform: scale(0); opacity: 0; }
+  60% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.animate-comic-float { animation: comic-float 3s ease-in-out infinite; }
+.animate-comic-pop { animation: comic-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+
+/* Comic Text */
+.comic-text-stroke {
+  -webkit-text-stroke: 1.5px #1A1A2E;
+  paint-order: stroke fill;
+}
