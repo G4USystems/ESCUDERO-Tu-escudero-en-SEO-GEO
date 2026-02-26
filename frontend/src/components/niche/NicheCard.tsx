@@ -180,7 +180,7 @@ export function NicheCard({ niche, projectId, stats, onDelete }: NicheCardProps)
       {/* Pencil (→ config) + trash — appear on hover */}
       <div className="absolute right-2 top-2 flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
         <Link
-          href={base}
+          href={`${base}?config=1`}
           onClick={(e) => e.stopPropagation()}
           className="rounded-sm p-1.5 text-comic-ink-soft/50 hover:bg-comic-aged hover:text-comic-ink transition-colors"
           title="Configurar nicho"

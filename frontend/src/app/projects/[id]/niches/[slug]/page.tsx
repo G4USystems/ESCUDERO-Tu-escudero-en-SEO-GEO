@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import {
   niches as nichesApi,
@@ -60,8 +60,10 @@ function StepRow({ done, label, detail }: { done: boolean; label: string; detail
 export default function NicheWorkspacePage() {
   const params = useParams();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const projectId = params.id as string;
   const slug = params.slug as string;
+  const forceConfig = searchParams.get("config") === "1";
 
   const [niche, setNiche] = useState<NicheDetail | null>(null);
   const [allBrands, setAllBrands] = useState<Brand[]>([]);
@@ -230,8 +232,8 @@ export default function NicheWorkspacePage() {
     </div>
   );
 
-  // ── VIEW A: not configured → config form ─────────────────────────────────────
-  if (!hasCompetitors) {
+  // ── VIEW A: not configured OR forced config mode → config form ───────────────
+  if (!hasCompetitors || forceConfig) {
     return (
       <div className="space-y-6">
         <div>
@@ -258,9 +260,21 @@ export default function NicheWorkspacePage() {
           />
         </section>
 
-        <p className="text-[11px] text-comic-ink-soft/60 italic">
-          Añade al menos un competidor para poder continuar.
-        </p>
+        {hasCompetitors ? (
+          <div className="pt-2">
+            <button
+              onClick={() => router.push(`/projects/${projectId}/niches/${slug}`)}
+              className="flex items-center gap-1.5 rounded-sm border-2 border-comic-ink bg-comic-yellow px-4 py-2 text-sm font-bold text-comic-ink shadow-comic-xs transition-all hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none"
+            >
+              Guardar
+              <ChevronRight className="h-4 w-4" />
+            </button>
+          </div>
+        ) : (
+          <p className="text-[11px] text-comic-ink-soft/60 italic">
+            Añade al menos un competidor para poder continuar.
+          </p>
+        )}
       </div>
     );
   }
